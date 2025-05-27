@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 30px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* eventCard with margin, padding, border */
+.eventCard {
+  background-color: #ffffff;
+  border: 2px solid #0984e3;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(9, 132, 227, 0.2);
+}
+
+/* form input fields - add outline on focus */
+input[type="text"],
+input[type="email"] {
+  width: 300px;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: outline 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  outline: 3px solid #00b894;
+  border-color: #00b894;
+}
+
+/* visibility hidden vs display none */
+.visibility-demo p {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+/* hides element but takes space */
+.hidden-visibility {
+  visibility: hidden;
+}
+
+/* hides element and removes from layout */
+.hidden-display {
+  display: none;
+}

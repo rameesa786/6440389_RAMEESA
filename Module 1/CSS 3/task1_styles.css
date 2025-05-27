@@ -1,0 +1,14 @@
+/* General text styling */
+p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Box styling */
+.custom-box {
+  background-color: #d9edf7;
+  padding: 15px;
+  border-left: 5px solid #31708f;
+  margin-top: 20px;
+}

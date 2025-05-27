@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Find Nearby Events - Geolocation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+    #error {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Find Nearby Events</h2>
+
+  <button id="findEventsBtn">Find Nearby Events</button>
+
+  <div id="output"></div>
+  <div id="error"></div>
+
+  <script>
+    const btn = document.getElementById('findEventsBtn');
+    const output = document.getElementById('output');
+    const errorDiv = document.getElementById('error');
+
+    btn.onclick = function() {
+      output.textContent = 'Locating...';
+      errorDiv.textContent = '';
+
+      if (!navigator.geolocation) {
+        errorDiv.textContent = 'Geolocation is not supported by your browser.';
+        output.textContent = '';
+        return;
+      }
+
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,        // 10 seconds
+        maximumAge: 0
+      };
+
+      navigator.geolocation.getCurrentPosition(success, error, options);
+
+      function success(position) {
+        const latitude = position.coords.latitude.toFixed(6);
+        const longitude = position.coords.longitude.toFixed(6);
+        output.textContent = `Your location is: Latitude ${latitude}, Longitude ${longitude}`;
+      }
+
+      function error(err) {
+        switch(err.code) {
+          case err.PERMISSION_DENIED:
+            errorDiv.textContent = 'Permission denied. Please allow location access.';
+            break;
+          case err.POSITION_UNAVAILABLE:
+            errorDiv.textContent = 'Location information is unavailable.';
+            break;
+          case err.TIMEOUT:
+            errorDiv.textContent = 'The request to get your location timed out.';
+            break;
+          default:
+            errorDiv.textContent = 'An unknown error occurred.';
+            break;
+        }
+        output.textContent = '';
+      }
+    };
+  </script>
+
+</body>
+</html>

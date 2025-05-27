@@ -1,0 +1,36 @@
+body {
+  background-color: #e0f7fa; /* Fallback HEX color */
+  background-image: url('https://images.unsplash.com/photo-1525026198548-4baa812f1183');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Gradient applied to header */
+.gradient-header {
+  background: linear-gradient(to right, #00b894, #55efc4);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Event card with RGBA background and HEX text color */
+.eventCard {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  margin: 30px;
+  border-left: 5px solid #00cec9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Intro section with semi-transparent background */
+.intro {
+  background-color: rgba(0, 150, 136, 0.2);
+  padding: 15px 25px;
+  margin: 20px;
+  border-radius: 5px;
+  font-size: 18px;
+}

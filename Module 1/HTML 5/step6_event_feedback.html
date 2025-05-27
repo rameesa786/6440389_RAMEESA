@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    #phoneError {
+      color: red;
+      font-size: 0.9em;
+    }
+    #feeDisplay {
+      margin-top: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    #charCount {
+      font-size: 0.9em;
+      margin-top: 5px;
+      color: #555;
+    }
+    #enlargeImage {
+      width: 150px;
+      border: 2px solid #555;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#contact">Contact</a>
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <h2>Event Feedback Form</h2>
+  <form id="feedbackForm">
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone" placeholder="Enter 10-digit phone number" required>
+    <div id="phoneError"></div>
+
+    <label for="eventSelect">Select Event:</label>
+    <select id="eventSelect" name="eventSelect" required>
+      <option value="" disabled selected>Select an event</option>
+      <option value="music" data-fee="50">Music Festival</option>
+      <option value="art" data-fee="30">Art Workshop</option>
+      <option value="food" data-fee="20">Food Fair</option>
+      <option value="tech" data-fee="40">Tech Meetup</option>
+      <option value="charity" data-fee="25">Charity Run</option>
+    </select>
+    <div id="feeDisplay"></div>
+
+    <label for="feedback">Your Feedback:</label>
+    <textarea id="feedback" name="feedback" rows="4" placeholder="Type your feedback here..." required></textarea>
+    <div id="charCount">Characters: 0</div>
+
+    <button type="button" id="submitBtn">Submit Feedback</button>
+
+  </form>
+
+  <img id="enlargeImage" src="https://via.placeholder.com/150x100" alt="Community Event" title="Double-click to enlarge">
+
+  <script>
+    const phoneInput = document.getElementById('phone');
+    const phoneError = document.getElementById('phoneError');
+    const eventSelect = document.getElementById('eventSelect');
+    const feeDisplay = document.getElementById('feeDisplay');
+    const feedback = document.getElementById('feedback');
+    const charCount = document.getElementById('charCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const enlargeImage = document.getElementById('enlargeImage');
+
+    // Validate phone on blur
+    phoneInput.onblur = function() {
+      const phone = phoneInput.value.trim();
+      const phoneRegex = /^\d{10}$/;
+      if (!phoneRegex.test(phone)) {
+        phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+      } else {
+        phoneError.textContent = '';
+      }
+    };
+
+    // Show event fee on change
+    eventSelect.onchange = function() {
+      const selectedOption = eventSelect.options[eventSelect.selectedIndex];
+      const fee = selectedOption.getAttribute('data-fee');
+      if (fee) {
+        feeDisplay.textContent = `Event Fee: $${fee}`;
+      } else {
+        feeDisplay.textContent = '';
+      }
+    };
+
+    // Show confirmation on submit button click
+    submitBtn.onclick = function() {
+      if (phoneError.textContent !== '') {
+        alert('Please fix errors before submitting.');
+        return;
+      }
+      if (!phoneInput.value || !eventSelect.value || !feedback.value) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      alert('Thank you for your feedback!');
+      document.getElementById('feedbackForm').reset();
+      feeDisplay.textContent = '';
+      charCount.textContent = 'Characters: 0';
+    };
+
+    // Double-click to enlarge image
+    enlargeImage.ondblclick = function() {
+      if (enlargeImage.style.width === '300px') {
+        enlargeImage.style.width = '150px';
+      } else {
+        enlargeImage.style.width = '300px';
+      }
+    };
+
+    // Key events on feedback textarea to count characters
+    feedback.addEventListener('input', function() {
+      charCount.textContent = `Characters: ${feedback.value.length}`;
+    });
+  </script>
+
+</body>
+</html>
