@@ -1,6 +1,4 @@
 # 6440389_RAMEESA
-RAMEESA.....
-
 ## 📚 Modules Overview
 
 ### ✅ Module 1: Front-End Foundations
